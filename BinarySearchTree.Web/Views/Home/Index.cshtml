@@ -1,0 +1,68 @@
+﻿<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center"><button id="btnParent" class="btn-primary">Parent</button></div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <label id="curValue" style="font-size:xx-large"></label>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-1 text-center">
+        <button id="btnLeft" class="btn-primary">Left</button>
+    </div>
+    <div class="col-md-1 text-center">
+        <button id="btnRight" class="btn-primary">Right</button>
+    </div>
+    <div class="col-md-5"></div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        setCurrentNode('00000000-0000-0000-0000-000000000000'); //Get Root
+
+        function setCurrentNode(id) {
+            var root = '/api/';
+            var url = root + 'binarysearchtree?id=' + id;
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'GET',
+                success: function(data) {
+                    $('#curValue').text(data.value);
+                    $('#btnParent').val(data.parentId);
+                    $('#btnLeft').val(data.leftId);
+                    $('#btnRight').val(data.rightId);
+                }
+            });
+        }
+
+        $('#btnParent').click(function() {
+            if (!$('#btnParent').val()) {
+                alert("This is root, no more parents.");
+                return;
+            }
+            setCurrentNode($('#btnParent').val());
+        });
+        $('#btnLeft').click(function() {
+            if (!$('#btnLeft').val()) {
+                alert("There are no more left children.");
+                return;
+            }
+            setCurrentNode($('#btnLeft').val());
+        });
+        $('#btnRight').click(function() {
+            if (!$('#btnRight').val()) {
+                alert("There are no more right children.");
+                return;
+            }
+            setCurrentNode($('#btnRight').val());
+        });
+
+    </script>
+}
