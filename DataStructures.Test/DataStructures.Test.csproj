@@ -53,12 +53,6 @@
     <Compile Include="LinkedListTailPointerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataStructures\DataStructures.csproj">
-      <Project>{219bc986-6b8d-46d7-b9c3-38ac4541fd90}</Project>
-      <Name>DataStructures</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
